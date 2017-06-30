@@ -6,9 +6,9 @@
 <div></div>
 {{/if}}
 <h1>Posts</h1>
-{{#each post}}
+{{#each posts}}
 <a href="/post?p={{this._id}}">{{this.title}}</a>
-by: {{this.year}}
+by: {{this.user}}
 Date: {{this.date.month}} / {{this.date.day}} / {{this.date.year}}
 {{/each}}
 </div>

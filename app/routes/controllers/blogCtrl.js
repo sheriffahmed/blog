@@ -1,4 +1,4 @@
-var post = require ("../../models/userModel.js");
+var post = require ("../../models/blogPost");
 
 
 // function newPost = function(req, res){
@@ -20,27 +20,19 @@ var post = require ("../../models/userModel.js");
 // 	})
 // }
 
-function updateBlogPost(req, res){
-	Post.update({"_id": req.query.id}, {$set: {"post":
-	req.body.postBody, "title": req.body.blogTitle}}, function(err,
-		doc) {
-		if(err){
-			res.redirect("/index?update=fail");
-		} else {
-			res.redirect("/index?update=success");
-		}
-	});
-}
+// function updateBlogPost(req, res){
+// 	post.update({"_id": req.query.id}, {$set: {"post":
+// 	req.body.postBody, "title": req.body.blogTitle}}, function(err,
+// 		doc) {
+// 		if(err){
+// 			res.redirect("/?update=fail");
+// 		} else {
+// 			res.redirect("/?update=success");
+// 		}
+// 	});
+// }
 
-function deleteBlogPost(req, res){
-	Post.remove({"_id": req.query.post}, function(err, post){
-		if(err){
-			console.log(err);
-		} else {
-			res.redirect("/index");
-		}
-	});
-}
+
 
 function today(){
 	var date = new Date();
@@ -69,11 +61,11 @@ var blogPages = {
 		});
 	},
 update: function(req, res){
-	Post.findOne({"_id": req.query.post}, function(err, post){
+	post.findOne({"_id": req.query.post}, function(err, post){
 		if(err){
 			console.log(err);
 		} else {
-			res.render("edit", {
+			res.render("update", {
 				post: post
 			});
 		}
@@ -82,7 +74,7 @@ update: function(req, res){
 };
 
 function createBlogPost(req, res){
-    new Post({
+    new post({
         title: req.body.blogTitle,
         post: req.body.postBody,
         date: {
@@ -95,18 +87,28 @@ function createBlogPost(req, res){
         if(err){
           console.log(err);
         } else {
-          res.redirect("/index");
+          res.redirect("/");
         }
     })
 }
 
+function deleteBlogPost(req, res){
+	post.remove({"_id": req.query.post}, function(err, post){
+		if(err){
+			console.log(err);
+		} else {
+			res.redirect("/");
+		}
+	});
+}
+
 
 function updateBlogPost(req, res){
-  Post.update({"_id": req.query.id}, {$set: {"post": req.body.postBody, "title": req.body.blogTitle}}, function(err, doc){
+  post.update({"_id": req.query.id}, {$set: {"post": req.body.postBody, "title": req.body.blogTitle}}, function(err, doc){
     if(err){
-      res.redirect("/index?update=fail");
+      res.redirect("/?update=fail");
     } else {
-      res.redirect("/index?update=success");
+      res.redirect("/?update=success");
     }
   });
 }

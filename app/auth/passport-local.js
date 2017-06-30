@@ -14,7 +14,7 @@ var LocalStrategy = require("passport-local"), Strategy,
 
 
 	passport.use("local-login", new LocalStrategy({
-		usernameField: "userName",
+		usernameField: "username",
 		passwordField: "password",
 		passReqToCallback: true
 	}, function(request, username, password, done){

@@ -1,24 +1,23 @@
 var r = require("./routes.json"); 
 var controllers = {
-	static: require("./controllers/pages"),
+	pages: require("./controllers/pages"),
 	session: require("./controllers/session"),
 	blogCtrl: require("./controllers/blogCtrl")
 };
 
 module.exports = function(app, passport){
-	app.get(r.home, controllers.static.index);
 
-	app.get(r.login, controllers.static.login);
+	app.get(r.login, controllers.pages.login);
 
-	app.get(r.index, controllers.static.index);
+	app.get(r.index, controllers.pages.index);
 
-	app.get(r.post, controllers.static.post);
+	app.get(r.post, controllers.pages.post);
 
 	app.get(r.create, controllers.session, controllers.blogCtrl.createPage);
 
 	app.get(r.update, controllers.session, controllers.blogCtrl.updatePage);
 
-	app.post(r.signup, controllers.static.signup);
+	app.post(r.signup, controllers.pages.signup);
 
 	app.post(r.login, passport.authenticate("local-login", {
 		successRedirect: r.index,
@@ -32,5 +31,5 @@ module.exports = function(app, passport){
 	app.delete(r.delete, controllers.session, controllers.blogCtrl.delete);
 
 
-	// app.get(r.index, controllers.static.index);
+	// app.get(r.index, controllers.pages.index);
 }
