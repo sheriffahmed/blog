@@ -6,14 +6,16 @@ var express = require("express"),
 	hbs = require("hbs"),
 	bodyParser = require("body-parser"),
 	path =  require("path"),
+	methodOverride = require("method-override"),
+	auth = require("./auth/passport-local"),
 	routes = require("./routes/routes"),
 	app = express();
 
 	// app.use("/client", path.join(__dirname, "app/client"));
-	app.use("/static", express.static(path.join(__dirname, "app/client")));
+	app.use("/static", express.static(path.join(__dirname, "client")));
 
 	app.set("view engine", "hbs");
-	app.set("views", path.join(__dirname, "app/client"));
+	app.set("views", path.join(__dirname, "views"));
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({
 	extended: true	
@@ -25,14 +27,17 @@ var express = require("express"),
 		saveUninitialized: true
 	}));
 
+	app.use(methodOverride('_method'));
+
 	app.use(passport.initialize());
 	app.use(passport.session());
 
 	// localAuth(passport);
+	auth(passport);
+	routes(app, passport);
 
-	routes(app);
+	// mongoose.connect("mongodb://localhost/blog");
+	mongoose.connect(process.env.DB_URL);
 
-	mongoose.connect("mongodb://localhost/user");
-
-		app.listen(8080);
+		app.listen(process.env.PORT || 8080);
 	console.log("server is running");

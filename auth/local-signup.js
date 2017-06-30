@@ -1,7 +1,7 @@
 var bcrypt = require("bcrypt-nodejs"),
 	User = require("../models/userModel");
 
-	module.exports = function(user. callback){
+	module.exports = function(user, callback){
 		new User({
 			username: user.name,
 			password: bcrypt.hashSync(user.pass),

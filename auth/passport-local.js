@@ -11,7 +11,7 @@ var LocalStrategy = require("passport-local"), Strategy,
 		done(null, id);
 	});
 
-	}
+
 
 	passport.use("local-login", new LocalStrategy({
 		usernameField: "userName",
