@@ -1,4 +1,4 @@
-var post = require ("../../models/userModel");
+var post = require ("../../models/userModel.js");
 
 
 // function newPost = function(req, res){
