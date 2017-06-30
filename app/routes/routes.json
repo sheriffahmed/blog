@@ -1,0 +1,10 @@
+{
+	
+	"index": "/",
+	"login": "/login",
+	"post": "/post",
+	"signup": "/signup",
+	"create": "/create",
+	"update": "/update",
+	"delete": "delete"
+}
