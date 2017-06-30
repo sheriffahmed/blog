@@ -12,7 +12,7 @@ module.exports = function(app, passport){
 
 	app.get(r.index, controllers.static.index);
 
-	app.get(r.post, controllers.session, controllers.static.post);
+	app.get(r.post, controllers.static.post);
 
 	app.get(r.create, controllers.session, controllers.blogCtrl.createPage);
 
